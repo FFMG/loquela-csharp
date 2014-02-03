@@ -38,18 +38,29 @@ namespace loquela_csharp
     public string Detect(List<string> unknownTexts)
     {
       string responseString;
-      using (var wb = new WebClient())
+      try
       {
-        var data = new NameValueCollection();
-        var i = 0;
-        foreach ( var unknownText in unknownTexts )
+        using (var wb = new WebClient())
         {
-          data.Add("q[" + (i++) + "]", unknownText);
-        }
-        data["key"] = ApiKey;
+          var data = new NameValueCollection();
+          var i = 0;
+          foreach (var unknownText in unknownTexts)
+          {
+            data.Add("q[" + (i++) + "]", unknownText);
+          }
+          data["key"] = ApiKey;
 
-        var response = wb.UploadValues(Url, data);
-        responseString = Encoding.Default.GetString(response);
+          var response = wb.UploadValues(Url, data);
+          responseString = Encoding.Default.GetString(response);
+        }
+      }
+      catch (System.Net.WebException ex)
+      {
+        responseString = "{\"error\":{\"code\":-1,\"message\":\"WebException:" + ex.Message + "\"}}";
+      }
+      catch (System.Exception ex)
+      {
+        responseString = "{\"error\":{\"code\":-1,\"message\":\"Exception:"+ex.Message+"\"}}";
       }
       return responseString;
     }
