@@ -5,24 +5,24 @@ using System.Collections.Generic;
 
 namespace loquela_csharp
 {
-  class loquela
+  class Loquela
   {
     /************************************************************************/
     /* This is the current url                                              */
     /************************************************************************/
-    protected const string _Url = "http://api.loque.la/v1/";
+    protected const string Url = "http://api.loque.la/v1/";
 
     /************************************************************************/
     /* The user given api key                                               */
     /************************************************************************/
-    protected readonly string _ApiKey;
+    protected readonly string ApiKey;
 
     /************************************************************************/
     /* Create the class, pass the api key                                   */
     /************************************************************************/
-    public loquela(string apiKey)
+    public Loquela(string apiKey)
     {
-      _ApiKey = apiKey;
+      ApiKey = apiKey;
     }
 
     /************************************************************************/
@@ -31,25 +31,24 @@ namespace loquela_csharp
     /************************************************************************/
     public string Detect(string unknownText)
     {
-      var unknownTexts = new List<string>();
-      unknownTexts.Add(unknownText);
+      var unknownTexts = new List<string> {unknownText};
       return Detect(unknownTexts);
     }
 
     public string Detect(List<string> unknownTexts)
     {
-      string responseString = "";
+      string responseString;
       using (var wb = new WebClient())
       {
         var data = new NameValueCollection();
         var i = 0;
         foreach ( var unknownText in unknownTexts )
         {
-          data.Add("q[" + (i++).ToString() + "]", unknownText);
+          data.Add("q[" + (i++) + "]", unknownText);
         }
-        data["key"] = _ApiKey;
+        data["key"] = ApiKey;
 
-        var response = wb.UploadValues(_Url, data);
+        var response = wb.UploadValues(Url, data);
         responseString = Encoding.Default.GetString(response);
       }
       return responseString;
@@ -60,14 +59,14 @@ namespace loquela_csharp
     /************************************************************************/
     public string Status()
     {
-      string responseString = "";
+      string responseString;
       using (var wb = new WebClient())
       {
         var data = new NameValueCollection();
         data["get"] = "status";
-        data["key"] = _ApiKey;
+        data["key"] = ApiKey;
 
-        var response = wb.UploadValues(_Url, data);
+        var response = wb.UploadValues(Url, data);
         responseString = Encoding.Default.GetString(response);
       }
       return responseString;

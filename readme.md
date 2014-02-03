@@ -12,11 +12,11 @@ Detects language of given text. Returns detected language codes and scores.
 ## Usage
 
 ### Single Language detection
-    var l = new loquela("YOUR-API-KEY");
+    var l = new Loquela("YOUR-API-KEY");
     var r = l.Detect("Welcome to this language project.");
 
 ### Multiple Languages detection
-    var l = new loquela("YOUR-API-KEY");
+    var l = new Loquela("YOUR-API-KEY");
 
     var unknownTexts = new List<string>();
     unknownTexts.Add("If we have no peace, it is because we have forgotten that we belong to each other." );
@@ -24,7 +24,7 @@ Detects language of given text. Returns detected language codes and scores.
     var rs = l.Detect( unknownTexts );
 
 ### Multiple Languages detection
-    var l = new loquela("YOUR-API-KEY");
+    var l = new Loquela("YOUR-API-KEY");
     var s = l.Status();
                                  
 ### Results
