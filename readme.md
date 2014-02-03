@@ -64,3 +64,5 @@ Detects language of given text. Returns detected language codes and scores.
 
 ## License
 This is free software, and may be redistributed as you please as long as you include this readme file.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/FFMG/loquela-csharp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
